@@ -3,107 +3,134 @@
 <head>
     <title>황금열쇠 랜덤뽑기</title>
     <meta property="og:image" content="https://goolb119.github.io/testgoolb/goldenkey22.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            padding: 20px;
+        }
         .table-container {
             margin-top: 20px;
+            overflow-x: auto; /* 모바일에서 테이블이 넘칠 경우 스크롤 가능하게 */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
         }
         .result {
             font-size: 24px;
             margin-top: 20px;
         }
+        button {
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <h1>황금열쇠 랜덤 뽑기 확률 세팅</h1>
-    <div class="table-container">
-        <table id="probabilityTable">
-            <tr>
-                <th>내용</th>
-                <th>확률</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td><input type="text" value="꽝 - 아무일도 없었다"></td>
-                <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="윷 한번 더 던지기"></td>
-                <td><input type="number" value="0.03" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="상품 획득"></td>
-                <td><input type="number" value="0.01" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="뒤로 한칸 움직이기"></td>
-                <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="앞으로 한칸 움직이기"></td>
-                <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="처음으로 돌아가기"></td>
-                <td><input type="number" value="0.02" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="팀 전체 얼굴에 낙서하기"></td>
-                <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="팀 전체 엉덩이로 이름쓰기"></td>
-                <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="상대방 말과 위치 바꾸기"></td>
-                <td><input type="number" value="0.04" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="무인도로 이동"></td>
-                <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="팀원 중 1명 콜라 1컵 원샷하기"></td>
-                <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-            <tr>
-                <td><input type="text" value="상대방 말 1칸 뒤로 움직이기"></td>
-                <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-
-            <tr>
-                <td><input type="text" value="팀 전체 팔굽혀 펴기 10회"></td>
-                <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-
-            <tr>
-                <td><input type="text" value="팀원 중 1명 성경말씀 1절 암송"></td>
-                <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-
-            <tr>
-                <td><input type="text" value="뿅망치 맞기"></td>
-                <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
-                <td><button onclick="deleteRow(this)">Delete</button></td>
-            </tr>
-        </table>
-        <button onclick="addRow()">추가</button>
+    <div class="container">
+        <h1>황금열쇠 랜덤 뽑기 확률 세팅</h1>
+        <div class="table-container">
+            <table id="probabilityTable">
+                <tr>
+                    <th>내용</th>
+                    <th>확률</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><input type="text" value="꽝 - 아무일도 없었다"></td>
+                    <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="윷 한번 더 던지기"></td>
+                    <td><input type="number" value="0.03" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="상품 획득"></td>
+                    <td><input type="number" value="0.01" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="뒤로 한칸 움직이기"></td>
+                    <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="앞으로 한칸 움직이기"></td>
+                    <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="처음으로 돌아가기"></td>
+                    <td><input type="number" value="0.02" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="팀 전체 얼굴에 낙서하기"></td>
+                    <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="팀 전체 엉덩이로 이름쓰기"></td>
+                    <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="상대방 말과 위치 바꾸기"></td>
+                    <td><input type="number" value="0.04" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="무인도로 이동"></td>
+                    <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="팀원 중 1명 콜라 1컵 원샷하기"></td>
+                    <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="상대방 말 1칸 뒤로 움직이기"></td>
+                    <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="팀 전체 팔굽혀 펴기 10회"></td>
+                    <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="팀원 중 1명 성경말씀 1절 암송"></td>
+                    <td><input type="number" value="0.1" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="뿅망치 맞기"></td>
+                    <td><input type="number" value="0.05" step="0.01" min="0" max="1"></td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                </tr>
+            </table>
+            <button onclick="addRow()">추가</button>
+        </div>
+        <button onclick="saveAndProceed()">저장 후 랜덤뽑기</button>
     </div>
-    <button onclick="saveAndProceed()">저장 후 랜덤뽑기</button>
 
     <script>
         function addRow() {
