@@ -59,13 +59,16 @@
                 cumProbs.push(cumSum);
             }
 
-            // Animation effect: Show 5 random values quickly
-            const animationCount = 5;
+            // Animation effect settings
+            const animationCount = 15;  // Number of times to show a random value
+            const animationSpeed = 45; // Speed of the animation in milliseconds
             const resultDiv = document.getElementById('result');
+
+            // Show 15 random values quickly
             let animationInterval = setInterval(() => {
                 const tempResult = items[Math.floor(Math.random() * items.length)];
                 resultDiv.innerText = tempResult;
-            }, 100);
+            }, animationSpeed);
 
             // Stop the animation and show the actual result
             setTimeout(() => {
@@ -81,7 +84,7 @@
                 }
 
                 resultDiv.innerText = result;
-            }, animationCount * 100);
+            }, animationCount * animationSpeed);
         }
     </script>
 </body>
