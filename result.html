@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Award Result</title>
+    <style>
+        .result-container {
+            width: 490px;
+            height: 200px;
+            position: absolute;
+            top: 280px;
+            left: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0); /* 투명 배경 */
+        }
+        .result {
+            font-size: 30px;
+            text-align: center;
+        }
+        .image-button {
+            width: 250px;
+            height: 83px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 580px;
+            left: 200px;
+        }
+        .overlay-image {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="back.png" alt="Overlay Image" class="overlay-image">
+    <img src="https://kcuniv-my.sharepoint.com/:i:/g/personal/net0331_msoffice_kcu_ac/EW_xUrb98jRCtmZYkC-7uT0B01doGbvDqk-JGYYRlCuBAw?e=JU6Smn" alt="Generate Award" class="image-button" onclick="generateAward()">
+    <div class="result-container">
+        <div class="result" id="result">추첨하기 버튼을 누르세요!</div>
+    </div>
+
+    <script>
+        function generateAward() {
+            const data = JSON.parse(localStorage.getItem('awardData'));
+            if (!data) {
+                alert('No data found. Please go back and set up the awards.');
+                return;
+            }
+
+            const items = data.items;
+            const probabilities = data.probabilities;
+
+            // Calculate cumulative probabilities
+            const cumProbs = [];
+            let cumSum = 0;
+            for (let i = 0; i < probabilities.length; i++) {
+                cumSum += probabilities[i];
+                cumProbs.push(cumSum);
+            }
+
+            // Animation effect: Show 5 random values quickly
+            const animationCount = 5;
+            const resultDiv = document.getElementById('result');
+            let animationInterval = setInterval(() => {
+                const tempResult = items[Math.floor(Math.random() * items.length)];
+                resultDiv.innerText = tempResult;
+            }, 100);
+
+            // Stop the animation and show the actual result
+            setTimeout(() => {
+                clearInterval(animationInterval);
+
+                const randValue = Math.random();
+                let result = "";
+                for (let i = 0; i < cumProbs.length; i++) {
+                    if (randValue < cumProbs[i]) {
+                        result = items[i];
+                        break;
+                    }
+                }
+
+                resultDiv.innerText = result;
+            }, animationCount * 100);
+        }
+    </script>
+</body>
+</html>
