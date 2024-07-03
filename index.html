@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Setup Awards</title>
+    <title>황금열쇠 랜덤뽑기</title>
+    <meta property="og:image" content="https://goolb119.github.io/testgoolb/goldenkey.png" />
     <style>
         .table-container {
             margin-top: 20px;
@@ -13,12 +14,12 @@
     </style>
 </head>
 <body>
-    <h1>Setup Awards</h1>
+    <h1>황금열쇠 랜덤 뽑기 확률 세팅</h1>
     <div class="table-container">
         <table id="probabilityTable">
             <tr>
-                <th>Item</th>
-                <th>Probability</th>
+                <th>내용</th>
+                <th>확률</th>
                 <th>Action</th>
             </tr>
             <tr>
@@ -100,9 +101,9 @@
                 <td><button onclick="deleteRow(this)">Delete</button></td>
             </tr>
         </table>
-        <button onclick="addRow()">Add Item</button>
+        <button onclick="addRow()">추가</button>
     </div>
-    <button onclick="saveAndProceed()">값 저장</button>
+    <button onclick="saveAndProceed()">저장 후 랜덤뽑기</button>
 
     <script>
         function addRow() {
